@@ -1,0 +1,147 @@
+.menu-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  opacity: 0;
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 6rem;
+  height: 6rem;
+  padding: 1.6rem;
+  background: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hamburger__line {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.hamburger__line::before,
+.hamburger__line::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  z-index: 1;
+  background-color: inherit;
+  transition: all 0.3s;
+}
+
+.hamburger__line::before {
+  top: -1rem;
+}
+
+.hamburger__line::after {
+  top: 1rem;
+}
+
+/* --------- TOGGLER ANIMATION --------- */
+/* Changes the initial position of the lines and set it for the X rotation */
+.toggler:checked + .hamburger > .hamburger__line {
+  transform: rotate(135deg);
+  background: rgb(156, 156, 156);
+}
+
+/* Turns line into X */
+.toggler:checked + .hamburger > .hamburger__line::before,
+.toggler:checked + .hamburger > .hamburger__line::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+/* Rotate on hover when checked */
+.toggler:checked:hover + .hamburger > .hamburger__line {
+  transform: rotate(225deg);
+}
+
+/* --------- SHOW MENU --------- */
+.toggler:checked ~ .menu {
+  visibility: visible;
+}
+
+.toggler:checked ~ .menu .menu__overlay--outer {
+  transform: scale(1);
+}
+
+.toggler:checked ~ .menu .menu__overlay--inner {
+  opacity: 1;
+}
+
+/* --------- OVERLAY --------- */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.menu__overlay--outer {
+  background: var(--overlay-color);
+  width: 300vw;
+  height: 300vh;
+  border-radius: 50%;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+  transition: all 0.4s;
+}
+
+.menu__overlay--inner {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  opacity: 0;
+  transition: all 0.4s 0.2s;
+}
+
+.menu__item {
+  list-style: none;
+  color: #fff;
+  padding: 1.6rem;
+}
+
+.menu__link {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.menu__link:hover {
+  color: var(--secondary-color);
+}
